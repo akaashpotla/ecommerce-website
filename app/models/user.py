@@ -11,4 +11,5 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique = True, nullable = False)
     password: Mapped[str] = mapped_column(String(300), nullable = False)
 
-    cart = relationship("cart", back_populates="user")
+    cart_items = relationship("CartItem", back_populates="user")
+    orders = relationship("Order", backpopulates="user")
