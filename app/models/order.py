@@ -11,4 +11,4 @@ class Order(Base):
     total: Mapped[int] = mapped_column(Float, nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    user = relationship("User", back_populates="orders")
+    cart_items = relationship("CartItem", back_populates="order")
