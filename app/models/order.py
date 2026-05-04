@@ -8,7 +8,9 @@ class Order(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
+    cart_id: Mapped[int] = mapped_column(Integer, ForeignKey("carts.id"), nullable=False)
     total: Mapped[int] = mapped_column(Float, nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    cart_items = relationship("CartItem", back_populates="order")
+    user = relationship("User", back_populates="orders")
+    cart = relationship("Cart", back_populates="order")
