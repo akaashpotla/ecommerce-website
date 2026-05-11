@@ -10,6 +10,11 @@ NAME = "Akaash Potla"
 EMAIL = "akaash@gmail.com"
 PASSWORD = "1Password!"
 
+def get_auth_token(client):
+    response = client.post(AUTH_URL, data={"username": EMAIL, "password": PASSWORD})
+    token = response.json()["access_token"]
+    return {"Authorization": f"Bearer {token}"}
+
 def create_user(db_session):
     user = User(
         name=NAME,
