@@ -1,4 +1,4 @@
-from tests.helper import create_user, NAME, EMAIL, PASSWORD
+from tests.helper import create_user, EMAIL, PASSWORD
 
 URL = "/api/v1/user/auth"
 

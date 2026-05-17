@@ -1,6 +1,6 @@
 import re
 
-from pydantic import BaseModel, EmailStr, Field, field_validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 class UserCreate(BaseModel):
     name: str = Field(min_length=1, max_length=255)
@@ -24,3 +24,14 @@ class UserResponse(BaseModel):
 
     class ConfigDict:
         from_attributes = True
+
+class ProductResponse(BaseModel):
+    id: int
+    name: str
+    description: str
+    price: float
+
+    model_config = ConfigDict(from_attributes=True)
+
+class ProductListResponse(BaseModel):
+    products: list[ProductResponse]
