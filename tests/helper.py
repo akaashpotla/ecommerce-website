@@ -6,8 +6,8 @@ from app.models.user import User
 
 AUTH_URL = "/api/v1/user/auth"
 
-NAME = "Akaash Potla"
-EMAIL = "akaash@gmail.com"
+NAME = "Kevin Johnson"
+EMAIL = "kevin@gmail.com"
 PASSWORD = "1Password!"
 
 def get_auth_token(client):
@@ -26,7 +26,7 @@ def create_user(db_session):
     db_session.refresh(user)
     return user
 
-def create_product(db_session, name="Test Product", description="A product", price=5.99):
+def create_product(db_session, name="Test Product", description="A Product", price=5.99):
     product = Product(name=name, description=description, price=price)
     db_session.add(product)
     db_session.commit()
@@ -53,3 +53,6 @@ def create_order(db_session, user, cart, total=9.99, quantity=1):
     db_session.commit()
     db_session.refresh(order)
     return order
+
+def login(client):
+    client.post(AUTH_URL, data={"username": EMAIL, "password": PASSWORD})

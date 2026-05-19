@@ -6,7 +6,7 @@ class TestProductModel:
     def test_product_created(self, db_session):
         product = create_product(db_session)
         assert product.name == "Test Product"
-        assert product.description == "A product"
+        assert product.description == "A Product"
         assert product.price == 5.99
         assert product.id is not None
 
