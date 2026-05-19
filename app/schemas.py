@@ -35,3 +35,21 @@ class ProductResponse(BaseModel):
 
 class ProductListResponse(BaseModel):
     products: list[ProductResponse]
+
+
+class CartItemResponse(BaseModel):
+    id: int
+    product_id: int
+    quantity: int
+    product: ProductResponse
+
+class CartResponse(BaseModel):
+    id: int
+    user_id: int
+    cart_items: list[CartItemResponse]
+
+    model_config = ConfigDict(from_attributes=True)
+
+class CartCreate(BaseModel):
+    product_id: int
+    quantity: int = 1

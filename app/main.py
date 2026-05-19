@@ -1,16 +1,27 @@
+from contextlib import asynccontextmanager
+
 from fastapi import Depends, FastAPI
-from sqlalchemy import text
+
 from sqlalchemy.orm import Session
+from app.db.session import engine
 from app.api.v1.users import router as users_router
 from app.api.v1.auth import router as auth_router
 from app.api.v1.products import router as product_router
+from app.api.v1.cart import router as cart_router
+from app.db.base import Base
 from app.db.session import get_db
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
+    yield
+
+app = FastAPI(lifespan=lifespan)
 
 app.include_router(users_router)
 app.include_router(auth_router)
 app.include_router(product_router)
+app.include_router(cart_router)
 
 from fastapi.middleware.cors import CORSMiddleware
 

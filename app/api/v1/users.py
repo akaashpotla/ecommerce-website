@@ -9,7 +9,6 @@ from app.core.hashing import get_password_hash
 
 router = APIRouter(prefix="/api/v1", tags=["users"])
 
-
 @router.post("/user", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def create_user(payload: UserCreate, db: Session = Depends(get_db)):
     user = UserModel(
