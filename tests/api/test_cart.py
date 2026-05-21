@@ -34,3 +34,14 @@ class TestGetCart:
         login(client)
         response = client.get(URL)
         assert response.status_code == 404
+
+class TestDeleteCartItem:
+
+    def test_delete_cart_item_success(self, client, db_session):
+        user = create_user(db_session)
+        product = create_product(db_session)
+        cart = create_cart(db_session, user)
+        cart_item = create_cart_item(db_session, cart, product)
+        login(client)
+        resp = client.delete(f"{URL}/{cart_item.id}")
+        assert resp.status_code == 204

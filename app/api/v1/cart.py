@@ -39,3 +39,19 @@ def get_cart(db: Session = Depends(get_db), current_user=Depends(get_current_use
     if cart is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cart not found!")
     return cart
+
+@router.delete("/cart/{cart_item_id}", status_code=status.HTTP_204_NO_CONTENT)
+def remove_from_cart(cart_item_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+    cart = db.query(Cart).filter(Cart.user_id == current_user.id).first()
+    if cart is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cart not found")
+
+    cart_item = db.query(CartItem).filter(
+        CartItem.id == cart_item_id,
+        CartItem.cart_id == cart.id
+    ).first()
+    if cart_item is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cart item not found")
+
+    db.delete(cart_item)
+    db.commit()
