@@ -45,7 +45,15 @@ function ProductGrid() {
         <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
             <Navbar bg="dark" variant="dark" className="px-4 mb-4">
                 <Navbar.Brand className="fw-bold">Car Parts</Navbar.Brand>
-                <Nav className="me-auto"></Nav>
+                <Nav className="me-auto">
+                    <Button
+                        variant="outline-light"
+                        className="me-2"
+                        onClick={() => navigate('/cart')}
+                    >
+                        Cart
+                    </Button>
+                </Nav>
                 <Button variant="outline-light" onClick={() => navigate('/login')}>
                     Logout
                 </Button>
