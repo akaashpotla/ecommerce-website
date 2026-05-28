@@ -47,8 +47,8 @@ def create_cart_item(db_session, cart, product, quantity=1):
     db_session.refresh(cart_item)
     return cart_item
 
-def create_order(db_session, user, cart, total=9.99, quantity=1):
-    order = Order(user_id=user.id, cart_id=cart.id, total=total, quantity=quantity)
+def create_order(db_session, user, cart, total=9.99):
+    order = Order(user_id=user.id, cart_id=cart.id, total=total)
     db_session.add(order)
     db_session.commit()
     db_session.refresh(order)

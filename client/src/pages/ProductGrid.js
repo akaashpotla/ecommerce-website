@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, Navbar, Nav, Spinner, Alert } from 'react-bootstrap';
+import { FaCartShopping } from "react-icons/fa6";
 
 function ProductGrid() {
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ function ProductGrid() {
                         className="me-2"
                         onClick={() => navigate('/cart')}
                     >
-                        Cart
+                        <FaCartShopping />
                     </Button>
                 </Nav>
                 <Button variant="outline-light" onClick={() => navigate('/login')}>

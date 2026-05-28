@@ -8,6 +8,7 @@ from app.api.v1.users import router as users_router
 from app.api.v1.auth import router as auth_router
 from app.api.v1.products import router as product_router
 from app.api.v1.cart import router as cart_router
+from app.api.v1.orders import router as order_router
 from app.db.base import Base
 from app.db.session import get_db
 
@@ -22,6 +23,7 @@ app.include_router(users_router)
 app.include_router(auth_router)
 app.include_router(product_router)
 app.include_router(cart_router)
+app.include_router(order_router)
 
 from fastapi.middleware.cors import CORSMiddleware
 

@@ -1,4 +1,4 @@
-from tests.helper import create_user, create_product, create_cart, create_cart_item, EMAIL, PASSWORD, login
+from tests.helper import create_user, create_product, create_cart, create_cart_item, login
 
 URL = "/api/v1/cart"
 AUTH_URL = "/api/v1/user/auth"

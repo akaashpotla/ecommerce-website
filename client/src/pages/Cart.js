@@ -40,6 +40,33 @@ function Cart() {
         }
     };
 
+    const handleUpdateQuantity = async (cartItemId, newQuantity) => {
+        if (newQuantity < 1) return;
+        try {
+            const res = await fetch(`http://localhost:8000/api/v1/cart/${cartItemId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ quantity: newQuantity })
+            });
+
+            if (res.status === 401) {
+                navigate('/login');
+                return;
+            }
+
+            if (res.ok) {
+                const data = await res.json();
+                setCartItems(data.cart_items || []);
+                setMessage(null);
+            } else {
+                throw new Error('Failed to update quantity');
+            }
+        } catch (err) {
+            setMessage({ type: 'error', text: err.message });
+        }
+    };
+
     const handleDelete = async (cartItemId) => {
         try {
             const res = await fetch(`http://localhost:8000/api/v1/cart/${cartItemId}`, {
@@ -133,18 +160,37 @@ function Cart() {
                                             <h5 className="fw-bold mb-1">
                                                 {item.product.name}
                                             </h5>
-                                            <div className="text-muted">
-                                                Quantity: {item.quantity}
+
+                                            <div className="d-flex align-items-center gap-2 my-2">
+                                                <span className="text-muted me-1">Quantity:</span>
+                                                <Button
+                                                    variant="outline-secondary"
+                                                    size="sm"
+                                                    onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+                                                    disabled={item.quantity <= 1}
+                                                >
+                                                    -
+                                                </Button>
+                                                <span className="fw-bold px-1">{item.quantity}</span>
+                                                <Button
+                                                    variant="outline-secondary"
+                                                    size="sm"
+                                                    onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                                                >
+                                                    +
+                                                </Button>
                                             </div>
+
                                             <div className="text-primary fw-bold">
                                                 ${(item.product.price * item.quantity).toFixed(2)}
                                             </div>
                                         </div>
+
                                         <Button
                                             variant="danger"
                                             onClick={() => handleDelete(item.id)}
                                         >
-                                            Remove
+                                            Delete
                                         </Button>
                                     </div>
                                 </Card.Body>
