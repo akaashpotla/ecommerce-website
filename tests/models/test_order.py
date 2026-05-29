@@ -8,7 +8,7 @@ class TestOrderModel:
         product = create_product(db_session)
         cart = create_cart(db_session, user)
         create_cart_item(db_session, cart, product)
-        order = create_order(db_session, user, cart, total=5.99, quantity=1)
+        order = create_order(db_session, user, cart, total=5.99)
         assert order.id is not None
         assert order.user_id == user.id
         assert order.cart_id == cart.id

@@ -4,7 +4,7 @@ from app.core.oauth2 import get_current_user
 from app.db.session import get_db
 from app.models.cart import Cart, CartItem
 from app.models.product import Product
-from app.schemas import CartCreate, CartResponse
+from app.schemas import CartCreate, CartResponse, CartItemUpdate
 
 router = APIRouter(prefix="/api/v1", tags=["cart"])
 
@@ -55,3 +55,19 @@ def remove_from_cart(cart_item_id: int, db: Session = Depends(get_db), current_u
 
     db.delete(cart_item)
     db.commit()
+
+@router.put("/cart/{cart_item_id}", response_model=CartResponse, status_code=status.HTTP_200_OK)
+def update_cart_item(cart_item_id: int, payload: CartItemUpdate, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+    cart = db.query(Cart).filter(Cart.user_id == current_user.id).first()
+    if cart is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cart not found")
+
+    cart_item = db.query(CartItem).filter(CartItem.id == cart_item_id, CartItem.cart_id == cart.id
+    ).first()
+    if cart_item is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cart item not found")
+
+    cart_item.quantity = payload.quantity
+    db.commit()
+    db.refresh(cart)
+    return cart

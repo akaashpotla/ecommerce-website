@@ -36,7 +36,6 @@ class ProductResponse(BaseModel):
 class ProductListResponse(BaseModel):
     products: list[ProductResponse]
 
-
 class CartItemResponse(BaseModel):
     id: int
     product_id: int
@@ -53,3 +52,14 @@ class CartResponse(BaseModel):
 class CartCreate(BaseModel):
     product_id: int
     quantity: int = 1
+
+class CartItemUpdate(BaseModel):
+    quantity: int = Field(ge=1)
+
+class OrderResponse(BaseModel):
+    id: int
+    user_id: int
+    cart_id: int
+    total: float
+
+    model_config = ConfigDict(from_attributes=True)
