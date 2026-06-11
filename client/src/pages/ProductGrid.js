@@ -46,7 +46,7 @@ function ProductGrid() {
         <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
             <Navbar bg="dark" variant="dark" className="px-4 mb-4">
                 <Navbar.Brand className="fw-bold" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                    Car Parts
+                    Motor Bay
                 </Navbar.Brand>
                 <Nav className="me-auto">
                     <Button
