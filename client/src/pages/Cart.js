@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Navbar, Nav, Button, Spinner, Alert, Card } from 'react-bootstrap';
+import API_URL from '../api';
 
 function Cart() {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Cart() {
 
     const fetchCart = async () => {
         try {
-            const res = await fetch('http://localhost:8000/api/v1/cart', {
+            const res = await fetch(`${API_URL}/api/v1/cart`, {
                 credentials: 'include'
             });
 
@@ -43,7 +44,7 @@ function Cart() {
     const handleUpdateQuantity = async (cartItemId, newQuantity) => {
         if (newQuantity < 1) return;
         try {
-            const res = await fetch(`http://localhost:8000/api/v1/cart/${cartItemId}`, {
+            const res = await fetch(`${API_URL}/api/v1/cart/${cartItemId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -69,7 +70,7 @@ function Cart() {
 
     const handleDelete = async (cartItemId) => {
         try {
-            const res = await fetch(`http://localhost:8000/api/v1/cart/${cartItemId}`, {
+            const res = await fetch(`${API_URL}/api/v1/cart/${cartItemId}`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
@@ -96,7 +97,7 @@ function Cart() {
         setMessage(null);
 
         try {
-            const res = await fetch('http://localhost:8000/api/v1/order', {
+            const res = await fetch(`${API_URL}/api/v1/order`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -145,7 +146,7 @@ function Cart() {
         <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
             <Navbar bg="dark" variant="dark" className="px-4 mb-4">
                 <Navbar.Brand className="fw-bold" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                    Motor Bay
+                    Parts Plus
                 </Navbar.Brand>
                 <Nav className="me-auto">
                     <Button

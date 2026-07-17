@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
+import API_URL from '../api';
 
 function Login() {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Login() {
             formData.append('username', creds.email);
             formData.append('password', creds.password);
 
-            const res = await fetch('http://localhost:8000/api/v1/user/auth', {
+            const res = await fetch(`${API_URL}/api/v1/user/auth`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formData,

@@ -8,7 +8,7 @@ function OrderConfirmation() {
         <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
             <Navbar bg="dark" variant="dark" className="px-4 mb-4">
                 <Navbar.Brand className="fw-bold" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                    Motor Bay
+                    Parts Plus
                 </Navbar.Brand>
             </Navbar>
             <Container className="text-center mt-5" style={{ maxWidth: '500px' }}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Button, Navbar, Nav, Spinner, Alert, Form, Card } from 'react-bootstrap';
+import API_URL from '../api';
 
 function ProductView() {
     const { id } = useParams();
@@ -13,7 +14,7 @@ function ProductView() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await fetch(`http://localhost:8000/api/v1/product/${id}`, {
+                const res = await fetch(`${API_URL}/api/v1/product/${id}`, {
                     credentials: 'include'
                 });
                 if (res.status === 401) { navigate('/login'); return; }
@@ -30,7 +31,7 @@ function ProductView() {
 
     const handleAddToCart = async () => {
         try {
-            const res = await fetch('http://localhost:8000/api/v1/cart', {
+            const res = await fetch(`${API_URL}/api/v1/cart`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -60,7 +61,7 @@ function ProductView() {
         <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
             <Navbar bg="dark" variant="dark" className="px-4 mb-4">
                 <Navbar.Brand className="fw-bold" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                    Motor Bay
+                    Parts Plus
                 </Navbar.Brand>
                 <Nav className="me-auto">
                     <Button

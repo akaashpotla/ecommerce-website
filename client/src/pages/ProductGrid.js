@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, Navbar, Nav, Spinner, Alert } from 'react-bootstrap';
 import { FaCartShopping } from "react-icons/fa6";
+import API_URL from '../api';
 
 function ProductGrid() {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ function ProductGrid() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch('http://localhost:8000/api/v1/product', {
+                const res = await fetch(`${API_URL}/api/v1/product`, {
                     credentials: 'include'
                 });
                 if (res.status === 401) {
@@ -46,7 +47,7 @@ function ProductGrid() {
         <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
             <Navbar bg="dark" variant="dark" className="px-4 mb-4">
                 <Navbar.Brand className="fw-bold" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                    Motor Bay
+                    Parts Plus
                 </Navbar.Brand>
                 <Nav className="me-auto">
                     <Button
@@ -57,6 +58,9 @@ function ProductGrid() {
                         <FaCartShopping />
                     </Button>
                 </Nav>
+                <Button variant="outline-light" className="me-2" onClick={() => navigate('/orders')}>
+                    Orders
+                </Button>
                 <Button variant="outline-light" onClick={() => navigate('/login')}>
                     Logout
                 </Button>

@@ -63,3 +63,6 @@ class OrderResponse(BaseModel):
     total: float
 
     model_config = ConfigDict(from_attributes=True)
+
+class OrderListResponse(BaseModel):
+    orders: list[OrderResponse]

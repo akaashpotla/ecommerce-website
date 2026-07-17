@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
+import API_URL from '../api';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Signup = () => {
         setStatus({ loading: true, error: null });
 
         try {
-            const res = await fetch('http://localhost:8000/api/v1/user', {
+            const res = await fetch(`${API_URL}/api/v1/user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
