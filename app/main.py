@@ -54,8 +54,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://www.parts-plus.xyz/",
-        "https://parts-plus.xyz/"
+        "https://www.parts-plus.xyz",
+        "https://parts-plus.xyz"
     ],
     allow_credentials=True,
     allow_methods=["*"],
