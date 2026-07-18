@@ -10,7 +10,7 @@ class Cart(Base):
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
 
     user = relationship("User", back_populates="cart")
-    cart_items = relationship("CartItem", back_populates="cart")
+    cart_items = relationship("CartItem", back_populates="cart", order_by="CartItem.id")
     order = relationship("Order", back_populates="cart", uselist=False)
 
 class CartItem(Base):
