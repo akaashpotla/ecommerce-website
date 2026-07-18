@@ -29,7 +29,7 @@ function LandingPage() {
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
           <Navbar.Brand className="fw-bold fs-3">
-            CarParts
+            Parts Plus
           </Navbar.Brand>
 
           <Nav className="ms-auto">
