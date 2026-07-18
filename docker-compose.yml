@@ -12,5 +12,16 @@ services:
     volumes:
       - ecommerce_postgres_data:/var/lib/postgresql/data
 
+  api:
+    build: .
+    container_name: ecommerce_api
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
 volumes:
   ecommerce_postgres_data:
